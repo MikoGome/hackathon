@@ -43,22 +43,29 @@ function randomNum(arr) {
   return Math.floor(Math.random() * arr.length);
 }
 
-const pokeballs = ["master-ball", 
-"ultra-ball", 
-"great-ball", 
-"poke-ball", 
-"safari-ball", 
-"net-ball", 
-"dive-ball", 
-"nest-ball", 
-"repeat-ball", 
-"timer-ball", 
-"luxury-ball", 
-"premier-ball",
-"dusk-ball",
-"heal-ball",
-"quick-ball",
-"cherish-ball"]
+const pokeballs = ["https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/master-ball.png", 
+"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/ultra-ball.png", 
+"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/great-ball.png", 
+"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/poke-ball.png", 
+"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/safari-ball.png", 
+"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/net-ball.png", 
+"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/dive-ball.png", 
+"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/nest-ball.png", 
+"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/repeat-ball.png", 
+"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/timer-ball.png", 
+"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/luxury-ball.png", 
+"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/premier-ball.png",
+"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/dusk-ball.png",
+"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/heal-ball.png",
+"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/quick-ball.png",
+"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/cherish-ball.png"]
+
+const pokeballsPreload = [];
+for(let i = 0; i < pokeballs.length; i++) {
+  const pre = new Image();
+  pre.src = pokeballs[i];
+  pokeballsPreload.push(pre);
+}
 
 function createImg(link) {
   const image = document.createElement("img");
@@ -97,7 +104,7 @@ function createImg(link) {
   });
 
   image.addEventListener("mouseover", () => {
-    image.style.cursor = `url("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/${pokeballs[Math.floor(Math.random() * pokeballs.length)]}.png"), pointer`;
+    image.style.cursor = `url(${pokeballs[Math.floor(Math.random() * pokeballs.length)]}), pointer`;
   });
 
   image.addEventListener("dblclick", () => {
