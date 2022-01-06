@@ -1,6 +1,7 @@
 let input = [];
 let clear = null;
 let summon = true;
+let zIdx = 1000000;
 
 document.body.addEventListener("keydown", (e) => {
   clearTimeout(clear);
@@ -42,11 +43,29 @@ function randomNum(arr) {
   return Math.floor(Math.random() * arr.length);
 }
 
+const pokeballs = ["master-ball", 
+"ultra-ball", 
+"great-ball", 
+"poke-ball", 
+"safari-ball", 
+"net-ball", 
+"dive-ball", 
+"nest-ball", 
+"repeat-ball", 
+"timer-ball", 
+"luxury-ball", 
+"premier-ball",
+"dusk-ball",
+"heal-ball",
+"quick-ball",
+"cherish-ball"]
+
 function createImg(link) {
   const image = document.createElement("img");
     
   image.setAttribute("src", link);
   image.classList.add("pokemonPal");
+  image.style.zIndex = String(zIdx);
   image.setAttribute("draggable", false);
   
   document.querySelector("body").appendChild(image);
@@ -59,6 +78,8 @@ function createImg(link) {
     x = event.pageX;
     y = event.pageY;
     drag = image;
+    console.log(image.style.zIndex);
+    image.style.zIndex = String(zIdx+1)
   });
   
   image.addEventListener("mousemove", (event) => {
@@ -72,14 +93,14 @@ function createImg(link) {
   
   image.addEventListener("mouseup", () => {
     drag = null;
+    zIdx++;
+  });
+
+  image.addEventListener("mouseover", () => {
+    image.style.cursor = `url("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/${pokeballs[Math.floor(Math.random() * pokeballs.length)]}.png"), pointer`;
   });
 
   image.addEventListener("dblclick", () => {
     image.remove();
   });
-
-  // setInterval(() => {
-  //   console.log('hit 2');
-  //   image.classList.toggle("bounce2");
-  // }, 5000)
 }
