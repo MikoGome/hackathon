@@ -2,6 +2,11 @@
     -webkit-animation: breathing 5s ease-out infinite normal;
     animation: breathing 5s ease-out infinite normal;
     cursor: pointer;
+    position: fixed;
+    z-index: 1000000000;
+    width: 200px;
+    left: 10vw;
+    top: 10vh;
 }
 
 @-webkit-keyframes breathing {

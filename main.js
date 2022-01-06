@@ -47,11 +47,6 @@ function createImg(link) {
     
     image.setAttribute("src", link);
     image.classList.add("pokemonPal");
-    image.style.position = "fixed";
-    image.style.zIndex = "1000000000";
-    image.style.width = "200px";
-    image.style.left = "0";
-    image.style.top = "0";
     image.setAttribute("draggable", false);
   
     document.querySelector("body").appendChild(image);
