@@ -4,7 +4,7 @@ let summon = true;
 
 document.body.addEventListener("keydown", (e) => {
   clearTimeout(clear);
-  if(/[a-z]/.test(e.key) && e.key.length === 1) {
+  if(/[a-z]/i.test(e.key) && e.key.length === 1) {
     input.push(e.key);
     
   }
@@ -45,36 +45,41 @@ function randomNum(arr) {
 function createImg(link) {
   const image = document.createElement("img");
     
-    image.setAttribute("src", link);
-    image.classList.add("pokemonPal");
-    image.setAttribute("draggable", false);
+  image.setAttribute("src", link);
+  image.classList.add("pokemonPal");
+  image.setAttribute("draggable", false);
   
-    document.querySelector("body").appendChild(image);
+  document.querySelector("body").appendChild(image);
     
-    let x = null;
-    let y = null;
-    let drag = null;
+  let x = null;
+  let y = null;
+  let drag = null;
   
-    image.addEventListener("mousedown", (event) => {
-      x = event.pageX;
-      y = event.pageY;
-      drag = image;
-    });
+  image.addEventListener("mousedown", (event) => {
+    x = event.pageX;
+    y = event.pageY;
+    drag = image;
+  });
   
-    image.addEventListener("mousemove", (event) => {
-      x2 = x - event.pageX;
-      y2 = y - event.pageY;
-      x = event.pageX;
-      y = event.pageY;
-      drag.style.left = `${drag.offsetLeft - x2 }px`;
-      drag.style.top = `${drag.offsetTop - y2}px`;
-    });
+  image.addEventListener("mousemove", (event) => {
+    x2 = x - event.pageX;
+    y2 = y - event.pageY;
+    x = event.pageX;
+    y = event.pageY;
+    drag.style.left = `${drag.offsetLeft - x2 }px`;
+    drag.style.top = `${drag.offsetTop - y2}px`;
+  });
   
-    image.addEventListener("mouseup", () => {
-      drag = null;
-    });
+  image.addEventListener("mouseup", () => {
+    drag = null;
+  });
 
-    image.addEventListener("dblclick", () => {
-      image.remove();
-    });
+  image.addEventListener("dblclick", () => {
+    image.remove();
+  });
+
+  // setInterval(() => {
+  //   console.log('hit 2');
+  //   image.classList.toggle("bounce2");
+  // }, 5000)
 }
