@@ -1,0 +1,12 @@
+{
+  "manifest_version": 2,
+  "name": "PokePal",
+  "description": "Have a pokemon right next to you while you browse",
+  "version": "1.0",
+  "content_scripts": [
+      {
+          "matches": ["https://*/*", "http://*/*", "<all_urls>"],
+          "js": ["./main.js"]
+      }
+  ]
+}
