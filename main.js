@@ -24,7 +24,6 @@ document.body.addEventListener("keydown", (e) => {
   }, 2000);
 });
 
-
 function app(obj) {                         
   const pkmArr = obj.results;          //<-- arr is an array of pokemons
   const random = randomNum(pkmArr);
@@ -39,7 +38,7 @@ function pokemonImgSelector(arr, index) {
     .then(data => data.json())
     .then(species => {
       const randIdx = randomNum(species.varieties);
-      return fetch(species.varieties[randIdx].pokemon.url)
+      return fetch(species.varieties[0].pokemon.url) //changed varities to 0 from randIdx
     })
     .then(data => data.json())
     .then(pokemon => {
@@ -76,7 +75,6 @@ for(let i = 0; i < pokeballs.length; i++) {
 }
 
 function createImg(link, species) {
-  console.log('inside species', species);
   const image = document.createElement("img");
     
   image.setAttribute("src", link);
@@ -95,8 +93,7 @@ function createImg(link, species) {
   image.addEventListener("mousedown", (event) => {
     x = event.pageX;
     y = event.pageY;
-    drag = image;
-    console.log(image.style.zIndex);
+    drag = image; 
     image.style.zIndex = String(zIdx+1)
   });
   
@@ -137,7 +134,7 @@ function evolve(nextEvo, img, num) {
   const time = setTimeout( () => {
     fetch(nextEvo[randomNum(nextEvo)].species.url)
       .then(data => data.json())
-      .then(species => fetch(species.varieties[randomNum(species.varieties)].pokemon.url))
+      .then(species => fetch(species.varieties[0].pokemon.url))
       .then(data => data.json())
       .then(stuff => {
         img.src = String(stuff.sprites.other["official-artwork"].front_default);
