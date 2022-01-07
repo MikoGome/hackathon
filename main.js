@@ -11,7 +11,7 @@ document.body.addEventListener("keydown", (e) => {
   }
   if(input.join("").toLowerCase() === "pokepal") {
     
-    if(summon) fetch("https://pokeapi.co/api/v2/pokemon?limit=898%27")
+    if(summon) fetch("https://pokeapi.co/api/v2/evolution-chain?limit=898%27")
       .then(data => data.json())
       .then(pokemons => {
         app(pokemons)
@@ -25,7 +25,7 @@ document.body.addEventListener("keydown", (e) => {
 });
 
 
-function app(obj) {                               
+function app(obj) {                         
   const pkmArr = obj.results;          //<-- arr is an array of pokemons
   const random = randomNum(pkmArr);
   pokemonImgSelector(pkmArr, random);
@@ -34,8 +34,16 @@ function app(obj) {
 function pokemonImgSelector(arr, index) {
   fetch(arr[index].url)
     .then(data => data.json())
+    .then(evolution => {
+      return fetch(evolution.chain.species.url)})
+    .then(data => data.json())
+    .then(species => {
+      const randIdx = randomNum(species.varieties);
+      return fetch(species.varieties[randIdx].pokemon.url)
+    })
+    .then(data => data.json())
     .then(pokemon => {
-      createImg(pokemon.sprites.other["official-artwork"]["front_default"]);
+      createImg(pokemon.sprites.other["official-artwork"]["front_default"], pokemon.species.url);
     }) 
 }
 
@@ -67,7 +75,8 @@ for(let i = 0; i < pokeballs.length; i++) {
   pokeballsPreload.push(pre);
 }
 
-function createImg(link) {
+function createImg(link, species) {
+  console.log('inside species', species);
   const image = document.createElement("img");
     
   image.setAttribute("src", link);
@@ -110,4 +119,35 @@ function createImg(link) {
   image.addEventListener("dblclick", () => {
     image.remove();
   });
+
+  fetch(species)
+    .then(data => data.json())
+    .then(spec => fetch(spec["evolution_chain"].url))
+    .then(data => data.json())
+    .then(evol => {
+      if(evol.chain.evolves_to) evolve(evol.chain.evolves_to, image, 2);
+    });
+}
+
+function evolve(nextEvo, img, num) {
+  if(nextEvo === undefined || num === 0) clearTimeout(time);
+  
+  const time = setTimeout( () => {
+    fetch(nextEvo[randomNum(nextEvo)].species.url)
+      .then(data => data.json())
+      .then(species => fetch(species.varieties[randomNum(species.varieties)].pokemon.url))
+      .then(data => data.json())
+      .then(stuff => {
+        img.src = String(stuff.sprites.other["official-artwork"].front_default);
+        if(img.src === null || img.src === "null") img.remove();
+        return fetch(stuff.species.url);
+      })
+      .then(data => data.json())
+      .then(test => fetch(test.evolution_chain.url))
+      .then(data => data.json())
+      .then(stuff => {
+        evolve(stuff.chain.evolves_to[randomNum(stuff.chain.evolves_to)].evolves_to, img, num - 1);
+      });
+  }, 30000);
+
 }
