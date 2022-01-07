@@ -81,6 +81,8 @@ function createImg(link, species) {
     
   image.setAttribute("src", link);
   image.classList.add("pokemonPal");
+  image.style.left = `${Math.floor(Math.random()*70) + 10}vw`
+  image.style.top = `${Math.floor(Math.random()*70) + 10}vh`
   image.style.zIndex = String(zIdx);
   image.setAttribute("draggable", false);
   

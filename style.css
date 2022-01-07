@@ -1,7 +1,7 @@
 .pokemonPal {
+    position: fixed;
     -webkit-animation: breathing 5s ease-out infinite normal;
     animation: bounce2 2s ease, breathing 5s ease-out 2s infinite normal;
-    position: fixed;
     width: 250px;
     left: 10vw;
     top: 10vh;
@@ -11,7 +11,7 @@
 	0% {transform: translateY(0); opacity: 0}
   20% {transform: translateY(0);}
   40% {transform: translateY(-30px);}
-  50% {transform: translateY(0); opacity 1}
+  50% {transform: translateY(0); opacity: 1;}
   60% {transform: translateY(-15px);}
   80% {transform: translateY(0);}
   100% {transform: translateY(0);} 
