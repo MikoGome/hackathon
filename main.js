@@ -124,12 +124,12 @@ function createImg(link, species) {
     .then(spec => fetch(spec["evolution_chain"].url))
     .then(data => data.json())
     .then(evol => {
-      if(evol.chain.evolves_to) evolve(evol.chain.evolves_to, image);
+      if(evol.chain.evolves_to) evolve(evol.chain.evolves_to, image, 2);
     });
 }
 
-function evolve(nextEvo, img) {
-  if(nextEvo === undefined) clearTimeout(time);
+function evolve(nextEvo, img, num) {
+  if(nextEvo === undefined || num === 0) clearTimeout(time);
   
   const time = setTimeout( () => {
     fetch(nextEvo[randomNum(nextEvo)].species.url)
@@ -145,7 +145,7 @@ function evolve(nextEvo, img) {
       .then(test => fetch(test.evolution_chain.url))
       .then(data => data.json())
       .then(stuff => {
-        evolve(stuff.chain.evolves_to[randomNum(stuff.chain.evolves_to)].evolves_to, img);
+        evolve(stuff.chain.evolves_to[randomNum(stuff.chain.evolves_to)].evolves_to, img, num - 1);
       });
   }, 30000);
 
