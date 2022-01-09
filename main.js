@@ -147,6 +147,6 @@ function evolve(nextEvo, img, num) {
       .then(stuff => {
         evolve(stuff.chain.evolves_to[randomNum(stuff.chain.evolves_to)].evolves_to, img, num - 1);
       });
-  }, 30000);
+  }, (1/(num || 1) * 120000));
 
 }
