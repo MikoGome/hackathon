@@ -82,6 +82,7 @@ function createImg(link, species) {
   image.style.left = `${Math.floor(Math.random()*70) + 10}vw`
   image.style.top = `${Math.floor(Math.random()*70) + 10}vh`
   image.style.zIndex = String(zIdx);
+  image.style.cursor = `url(${pokeballs[Math.floor(Math.random() * pokeballs.length)]}), pointer`;
   image.setAttribute("draggable", false);
   
   document.querySelector("body").appendChild(image);
@@ -109,10 +110,6 @@ function createImg(link, species) {
   image.addEventListener("mouseup", () => {
     drag = null;
     zIdx++;
-  });
-
-  image.addEventListener("mouseover", () => {
-    image.style.cursor = `url(${pokeballs[Math.floor(Math.random() * pokeballs.length)]}), pointer`;
   });
 
   image.addEventListener("dblclick", () => {

@@ -1,20 +1,24 @@
 .pokemonPal {
     position: fixed;
-    -webkit-animation: breathing 5s ease-out infinite normal;
+    -webkit-animation: bounce2 2s ease, breathing 5s ease-out infinite normal;
     animation: bounce2 2s ease, breathing 5s ease-out 2s infinite normal;
     width: 250px;
     left: 10vw;
     top: 10vh;
 }
 
+/* .pokemonPal:hover {
+  animation: rubberBand 2s ease;
+} */
+
 @keyframes bounce2 {
-	0% {transform: translateY(0); opacity: 0}
+	0% {transform: translateY(0); opacity: 0;}
   20% {transform: translateY(0);}
   40% {transform: translateY(-30px);}
-  50% {transform: translateY(0); opacity: 1;}
+  50% {transform: translateY(0);}
   60% {transform: translateY(-15px);}
   80% {transform: translateY(0);}
-  100% {transform: translateY(0);} 
+  100% {transform: translateY(0); opacity: 1;}
 	
 }
 
@@ -65,4 +69,26 @@
       transform: scale(1);
     }
   }
+
+  @keyframes wiggle {
+    0% { transform: skewX(9deg); } 
+    10% { transform: skewX(-8deg); } 
+    20% { transform: skewX(7deg); } 
+    30% { transform: skewX(-6deg); } 
+    40% { transform: skewX(5deg); } 
+    50% { transform: skewX(-4deg); } 
+    60% { transform: skewX(3deg); } 
+    70% { transform: skewX(-2deg); } 
+    80% { transform: skewX(1deg); } 
+    90% { transform: skewX(0deg); } 
+    100% { transform: skewX(0deg); } 
+ } 
+
+ @keyframes rubberBand {
+  0% {transform: scale(1);}
+  30% {transform: scaleX(1.1) scaleY(0.9);}
+  40% {transform: scaleX(0.9) scaleY(1.1);}
+  60% {transform: scaleX(1.05) scaleY(0.95);}
+  100% {transform: scale(1);}
+}
   
