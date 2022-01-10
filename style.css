@@ -5,6 +5,7 @@
     width: 250px;
     left: 10vw;
     top: 10vh;
+    user-select: none;
 }
 
 /* .pokemonPal:hover {
